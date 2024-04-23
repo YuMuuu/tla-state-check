@@ -13,7 +13,8 @@ jobs:
       image: talex5/tla
     steps:
     - run: pwd
-    - run: tree ../../
+    - run: ls ../
+    - run: ls ../../
     - run: ls -a
     - run: find *.tla | xargs java -cp tla2tools.jar pcal.trans
   test:
