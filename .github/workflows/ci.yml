@@ -13,7 +13,7 @@ jobs:
       image: talex5/tla
     steps:
     - run: find *.tla | xargs java -cp tla2tools.jar pcal.trans
-  build:
+  test:
     name: test model
     runs-on: ubuntu-latest
     container:
