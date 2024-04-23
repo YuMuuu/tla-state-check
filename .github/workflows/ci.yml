@@ -1,0 +1,24 @@
+name: ci
+
+jobs:
+  build:
+    name: build pluscal
+    runs-on: ubuntu-latest
+    container:
+      image: talex5/tla
+    steps:
+    - run: find *.tla | xargs java -cp tla2tools.jar pcal.trans
+  build:
+    name: test model
+    runs-on: ubuntu-latest
+    container:
+      image: talex5/tla
+    steps:
+    - run: find *.tla | xargs java -cp tla2tools.jar tlc2.TLC
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    container:
+      image: talex5/tla
+    steps:
+    - run: echo "The absence of an official formatter in TLA+ prevents verifying the format."
