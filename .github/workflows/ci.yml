@@ -10,29 +10,32 @@ jobs:
     name: build pluscal
     runs-on: ubuntu-latest
     container:
-      image: talex5/tla
-    # defaults:
-    #     run:
-    #        working-directory: /
+      image: tlatoolbox/tla
     steps:
     - uses: actions/checkout@v2
+    - name: Run TLA+ model checking
+      run: tlc path/to/your/tla_file.tla
     - run: pwd
     - run: ls ../
     - run: ls ../../
     - run: ls -a
-    - run: find *.tla | xargs java -cp tla2tools.jar pcal.trans
-  test:
+    - run: find *.tla | xargs pcal
+
+  model-checking:
     name: test model
     runs-on: ubuntu-latest
     container:
       image: talex5/tla
     steps:
-    - uses: actions/checkout@v4
-    - run: find *.tla | xargs java -cp tla2tools.jar tlc2.TLC
+    - uses: actions/checkout@v2
+    - name: Run TLA+ model checking
+      run: tlc path/to/your/tla_file.tla    
+    - run: find *.tla | xargs tlc
   lint:
     name: lint
     runs-on: ubuntu-latest
     container:
       image: talex5/tla
     steps:
-    - run: echo "The absence of an official formatter in TLA+ prevents verifying the format."
+    - name: Validate TLA+ syntax
+      run: find *.tla | xargs tlc -syntaxCheck
