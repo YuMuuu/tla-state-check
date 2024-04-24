@@ -13,12 +13,6 @@ jobs:
       image: talex5/tla
     steps:
     - uses: actions/checkout@v2
-    - name: Run TLA+ model checking
-      run: tlc path/to/your/tla_file.tla
-    - run: pwd
-    - run: ls ../
-    - run: ls ../../
-    - run: ls -a
     - run: find *.tla | xargs pcal
 
   model-checking:
@@ -28,14 +22,13 @@ jobs:
       image: talex5/tla
     steps:
     - uses: actions/checkout@v2
-    - name: Run TLA+ model checking
-      run: tlc path/to/your/tla_file.tla    
     - run: find *.tla | xargs tlc
+
   lint:
     name: lint
     runs-on: ubuntu-latest
     container:
       image: talex5/tla
     steps:
-    - name: Validate TLA+ syntax
-      run: find *.tla | xargs tlc -syntaxCheck
+    - uses: actions/checkout@v2      
+    - run: find *.tla | xargs tlc -syntaxCheck
