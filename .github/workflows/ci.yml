@@ -13,7 +13,7 @@ jobs:
       image: talex5/tla
     steps:
     - uses: actions/checkout@v2
-    - run: find *.tla | xargs pcal
+    - run: find *.tla | xargs java -DTLA-Library=/usr/local/lib/tlaps/ pcal.trans
 
   model-checking:
     name: test model
