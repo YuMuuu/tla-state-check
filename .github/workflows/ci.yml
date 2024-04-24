@@ -10,7 +10,7 @@ jobs:
     name: build pluscal
     runs-on: ubuntu-latest
     container:
-      image: hackenfreude/tlatoolbox-1.5.2
+      image: talex5/tla
     steps:
     - uses: actions/checkout@v2
     - name: Run TLA+ model checking
@@ -25,7 +25,7 @@ jobs:
     name: test model
     runs-on: ubuntu-latest
     container:
-      image: hackenfreude/tlatoolbox-1.5.2
+      image: talex5/tla
     steps:
     - uses: actions/checkout@v2
     - name: Run TLA+ model checking
@@ -35,7 +35,7 @@ jobs:
     name: lint
     runs-on: ubuntu-latest
     container:
-      image: hackenfreude/tlatoolbox-1.5.2
+      image: talex5/tla
     steps:
     - name: Validate TLA+ syntax
       run: find *.tla | xargs tlc -syntaxCheck
