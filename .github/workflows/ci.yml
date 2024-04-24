@@ -23,13 +23,4 @@ jobs:
       image: talex5/tla
     steps:
     - uses: actions/checkout@v2
-    - run: find *.tla | xargs tlc
-
-  lint:
-    name: lint
-    runs-on: ubuntu-latest
-    container:
-      image: talex5/tla
-    steps:
-    - uses: actions/checkout@v2      
-    - run: find *.tla | xargs tlc -syntaxCheck
+    - run: find *.tla | xargs java -DTLA-Library=/usr/local/lib/tlaps/ tlc2.TLC
