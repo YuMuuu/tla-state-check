@@ -1,0 +1,26 @@
+name: ci
+
+on:
+  push:
+    branches: 
+    - '**' 
+
+jobs:
+  build:
+    name: build pluscal
+    runs-on: ubuntu-latest
+    container:
+      image: talex5/tla
+    steps:
+    - uses: actions/checkout@v2
+    - run: find *.tla
+    - run: find *.tla | xargs java -DTLA-Library=/usr/local/lib/tlaps/ pcal.trans
+
+  model-checking:
+    name: test model
+    runs-on: ubuntu-latest
+    container:
+      image: talex5/tla
+    steps:
+    - uses: actions/checkout@v2
+    - run: find *.tla | xargs java -DTLA-Library=/usr/local/lib/tlaps/ tlc2.TLC
